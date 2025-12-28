@@ -1,0 +1,12 @@
+[tools]
+node = "22"
+bun = "latest"
+
+[hooks]
+postinstall = 'corepack enable && corepack prepare pnpm@latest --activate'
+
+[settings]
+experimental = true
+
+[env]
+_.path = ['{{config_root}}/node_modules/.bin']
