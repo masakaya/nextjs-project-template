@@ -68,3 +68,18 @@ pnpm dlx shadcn@latest add -a
 ```
 
 利用可能なコンポーネント一覧: https://ui.shadcn.com/docs/components
+
+## E2Eテストのセットアップ
+
+Playwrightを使用したE2Eテストを実行する前に、ブラウザをインストールする必要があります。
+
+```bash
+# Playwrightブラウザをインストール（初回のみ）
+pnpm exec playwright install
+
+# Chromiumのみインストール（軽量）
+pnpm exec playwright install chromium
+
+# E2Eテストを実行
+pnpm test:e2e
+```
