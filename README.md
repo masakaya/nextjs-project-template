@@ -83,3 +83,13 @@ pnpm exec playwright install chromium
 # E2Eテストを実行
 pnpm test:e2e
 ```
+
+## 外部PCからの開発サーバーアクセス
+
+LAN内の別PCから開発サーバーにアクセスする場合、WebSocketの警告が表示されることがあります。`next.config.ts`の`allowedDevOrigins`にIPアドレスを追加してください。
+
+```typescript
+const nextConfig: NextConfig = {
+  allowedDevOrigins: ['localhost', '192.168.1.14'], // アクセス元のIPを追加
+}
+```
