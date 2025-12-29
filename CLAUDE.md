@@ -4,7 +4,7 @@
 
 - Next.js 16 (App Router) + TypeScript 5.x strict mode
 - React 19
-- Tailwind CSS v4
+- Tailwind CSS v4 + shadcn/ui
 - Biome (linter/formatter)
 - pnpm (package manager)
 - Bun (dev server runtime)
@@ -50,8 +50,18 @@ CI/CDでも自動修正が実行され、修正があれば自動コミットさ
 ## Directory Structure
 
 - `src/app/` - ルーティング（ロジック最小限）
-- `src/components/` - コンポーネント
+- `src/components/ui/` - shadcn/uiコンポーネント
+- `src/components/` - カスタムコンポーネント
+- `src/lib/` - ユーティリティ関数
 - `.vscode/` - エディタ設定
+
+## UI実装ルール
+
+- UIコンポーネントはshadcn/ui (`src/components/ui/`) を優先使用
+- 新規UIが必要な場合は、まずshadcn/uiに該当コンポーネントがないか確認
+- カスタムが必要な場合はshadcn/uiを拡張して使用
+- `cn()` でTailwindクラス名を結合
+- コンポーネント追加: `pnpm dlx shadcn@latest add <component-name>`
 
 ## Git Workflow
 
