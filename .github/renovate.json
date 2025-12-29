@@ -1,0 +1,62 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "timezone": "Asia/Tokyo",
+  "schedule": ["every weekend"],
+  "prHourlyLimit": 2,
+  "prConcurrentLimit": 5,
+  "labels": ["dependencies", "renovate"],
+  "commitMessagePrefix": "chore(deps):",
+  "commitMessageAction": "update",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 3am on monday"]
+  },
+  "packageRules": [
+    {
+      "description": "Disable node version updates",
+      "matchManagers": ["nvm", "nodenv", "mise"],
+      "matchPackageNames": ["node"],
+      "enabled": false
+    },
+    {
+      "description": "Disable bun version updates",
+      "matchPackageNames": ["bun"],
+      "enabled": false
+    },
+    {
+      "description": "Auto-merge minor and patch updates for devDependencies",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "addLabels": ["auto-merge", "dev-dependencies"]
+    },
+    {
+      "description": "Auto-merge patch updates for dependencies",
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "addLabels": ["auto-merge"]
+    },
+    {
+      "description": "Manual review for major updates",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "addLabels": ["major-update"]
+    },
+    {
+      "description": "Group GitHub Actions updates",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "automerge": true,
+      "addLabels": ["github-actions"]
+    },
+    {
+      "description": "Skip auto-merge for security updates",
+      "matchDepTypes": ["dependencies"],
+      "isVulnerabilityAlert": true,
+      "automerge": false,
+      "addLabels": ["security"]
+    }
+  ]
+}
