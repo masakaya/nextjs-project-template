@@ -6,17 +6,21 @@
 - React 19
 - Tailwind CSS v4 + shadcn/ui
 - Biome (linter/formatter)
+- Vitest + Playwright + MSW (testing)
 - pnpm (package manager)
 - Bun (dev server runtime)
 
 ## Commands
 
 - `pnpm dev` - 開発サーバー起動 (Bun)
+- `pnpm dev:mock` - MSWモック有効で起動
 - `pnpm build` - 本番ビルド
 - `pnpm lint` - Biomeでチェック
 - `pnpm lint:fix` - Biomeで自動修正
-- `pnpm format` - コードフォーマット
 - `pnpm typecheck` - 型チェック（変更後必ず実行）
+- `pnpm test` - ユニットテスト実行
+- `pnpm test:e2e` - E2Eテスト実行
+- `pnpm generate:api` - OpenAPI型生成
 
 ## Code Style Rules
 
@@ -49,11 +53,16 @@ CI/CDでも自動修正が実行され、修正があれば自動コミットさ
 
 ## Directory Structure
 
-- `src/app/` - ルーティング（ロジック最小限）
+- `src/app/` - ルーティングのみ（ロジック最小限）
 - `src/components/ui/` - shadcn/uiコンポーネント
-- `src/components/` - カスタムコンポーネント
+- `src/components/features/` - 機能別コンポーネント
+- `src/hooks/` - カスタムフック
 - `src/lib/` - ユーティリティ関数
-- `.vscode/` - エディタ設定
+- `src/lib/api/` - APIクライアント
+- `src/types/` - 共通型定義
+- `src/mocks/` - MSWハンドラー
+- `src/api/generated/` - OpenAPI生成コード（編集禁止）
+- `e2e/` - E2Eテスト
 
 ## UI実装ルール
 
@@ -62,6 +71,20 @@ CI/CDでも自動修正が実行され、修正があれば自動コミットさ
 - カスタムが必要な場合はshadcn/uiを拡張して使用
 - `cn()` でTailwindクラス名を結合
 - コンポーネント追加: `pnpm dlx shadcn@latest add <component-name>`
+
+## Design System
+
+- CSS変数のみ使用（ハードコード色禁止）
+- ダークモード: `dark:` プレフィックス対応
+- スペーシング: Tailwind標準スケール (4, 8, 12, 16, 24, 32)
+- アイコン: Lucide React
+
+## Testing
+
+- ユニットテスト: Vitest + Testing Library
+- E2Eテスト: Playwright
+- APIモック: MSW (`src/mocks/handlers/`)
+- テストファイルは対象ファイルと同じディレクトリに `.test.ts(x)` で配置
 
 ## Git Workflow
 
@@ -89,3 +112,6 @@ git merge origin/main
 - コードスタイルは `biome.json` に従う
 - ESモジュールを使用（CommonJS禁止）
 - named export優先（default exportはページのみ）
+- API型は `src/api/generated/` から自動生成されたものを使用
+- フォームバリデーションはZod + React Hook Form
+- `src/api/generated/` は編集禁止（自動生成）
