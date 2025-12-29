@@ -105,6 +105,39 @@ pnpm test:e2e:report
 
 > **注意**: `--debug`モードはサーバー上でブラウザGUIを開くため、リモート環境では使用できません（ポートフォワードでも不可）。リモートデバッグにはHTMLレポートのトレース機能を使用してください。
 
+## OpenAPI型生成（TBD）
+
+`@hey-api/openapi-ts`を使用してOpenAPI仕様からTypeScript型とAPIクライアントを生成します。
+
+```bash
+# APIクライアントを生成
+pnpm generate:api
+```
+
+### 生成されるファイル
+
+`src/api/generated/` に以下が生成されます：
+
+- **TypeScript型**: OpenAPIスキーマからの型定義
+- **SDKクライアント**: API呼び出し用クライアント
+- **Zodスキーマ**: バリデーション用
+
+### 設定
+
+`openapi-ts.config.ts` でOpenAPI仕様のソースを指定：
+
+```typescript
+import { defineConfig } from '@hey-api/openapi-ts'
+
+export default defineConfig({
+  input: './openapi.json', // ローカルファイル or URL
+  output: 'src/api/generated',
+  plugins: ['@hey-api/typescript', '@hey-api/sdk', 'zod'],
+})
+```
+
+> **注意**: FastAPIとの連携方法は別途検討予定。生成されたファイルは `.gitignore` に含まれています。
+
 ## 外部PCからの開発サーバーアクセス
 
 LAN内の別PCから開発サーバーにアクセスする場合、WebSocketの警告が表示されることがあります。`next.config.ts`の`allowedDevOrigins`にIPアドレスを追加してください。
