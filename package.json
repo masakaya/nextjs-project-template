@@ -22,6 +22,7 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui-host=0.0.0.0 --ui-port=8080",
     "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report --host 0.0.0.0 --port 9323",
     "generate:api": "openapi-ts"
   },
   "dependencies": {

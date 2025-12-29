@@ -42,6 +42,7 @@ http://localhost:3000 でアプリケーションにアクセスできます。
 | `pnpm test:e2e` | Playwrightでe2eテストを実行 |
 | `pnpm test:e2e:ui` | E2EテストUIを起動（ポート8080） |
 | `pnpm test:e2e:debug` | E2Eテストをデバッグモードで実行 |
+| `pnpm test:e2e:report` | E2Eテストレポートを表示（ポート9323） |
 | `pnpm generate:api` | OpenAPI仕様からAPIクライアントを生成 |
 
 ## 技術スタック
@@ -97,7 +98,7 @@ pnpm exec playwright install chromium
 
 ```bash
 # HTMLレポートを表示（外部PCからアクセスする場合）
-pnpm exec playwright show-report --host 0.0.0.0 --port 9323
+pnpm test:e2e:report
 ```
 
 `http://<サーバーIP>:9323` でレポートにアクセスし、失敗したテストの「Trace」タブでステップごとの操作・スクリーンショット・DOM状態を確認できます。
