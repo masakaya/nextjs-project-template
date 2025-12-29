@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   biome:
-    name: Biome
+    name: Biome (Lint & Format)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,12 +20,15 @@ jobs:
         with:
           version: latest
 
-      - name: Run Biome with ReviewDog
+      - name: Run Biome Lint with ReviewDog
         uses: mongolyy/reviewdog-action-biome@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           level: error
+
+      - name: Check Format
+        run: biome format --check .
 
   typecheck:
     name: TypeScript
