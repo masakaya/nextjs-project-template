@@ -40,6 +40,8 @@ http://localhost:3000 でアプリケーションにアクセスできます。
 | `pnpm test:ui` | テストUIを起動 |
 | `pnpm test:coverage` | カバレッジ付きでテストを実行 |
 | `pnpm test:e2e` | Playwrightでe2eテストを実行 |
+| `pnpm test:e2e:ui` | E2EテストUIを起動（ポート8080） |
+| `pnpm test:e2e:debug` | E2Eテストをデバッグモードで実行 |
 | `pnpm generate:api` | OpenAPI仕様からAPIクライアントを生成 |
 
 ## 技術スタック
@@ -79,10 +81,28 @@ pnpm exec playwright install
 
 # Chromiumのみインストール（軽量）
 pnpm exec playwright install chromium
-
-# E2Eテストを実行
-pnpm test:e2e
 ```
+
+### E2Eテストの実行
+
+| コマンド | 説明 |
+|---------|------|
+| `pnpm test:e2e` | ヘッドレスでテスト実行 |
+| `pnpm test:e2e:ui` | UIモードで実行（ポート8080） |
+| `pnpm test:e2e:debug` | デバッグモードで実行（ローカルのみ） |
+
+### テスト結果の確認
+
+テスト失敗時はHTMLレポートで詳細を確認できます。
+
+```bash
+# HTMLレポートを表示（外部PCからアクセスする場合）
+pnpm exec playwright show-report --host 0.0.0.0 --port 9323
+```
+
+`http://<サーバーIP>:9323` でレポートにアクセスし、失敗したテストの「Trace」タブでステップごとの操作・スクリーンショット・DOM状態を確認できます。
+
+> **注意**: `--debug`モードはサーバー上でブラウザGUIを開くため、リモート環境では使用できません（ポートフォワードでも不可）。リモートデバッグにはHTMLレポートのトレース機能を使用してください。
 
 ## 外部PCからの開発サーバーアクセス
 
