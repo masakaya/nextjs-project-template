@@ -53,8 +53,20 @@ CI/CDでも自動修正が実行され、修正があれば自動コミットさ
 - `src/components/` - コンポーネント
 - `.vscode/` - エディタ設定
 
+## Git Workflow
+
+作業開始前に必ずmainブランチの最新コミットを取り込むこと:
+
+```bash
+git fetch origin
+git merge origin/main
+```
+
+コンフリクトが発生した場合は解消してからコミットする。
+
 ## Important Rules
 
+- **作業前にmainブランチを取り込む**（コンフリクト防止）
 - 変更後は必ず `pnpm typecheck` を実行
 - コードスタイルは `biome.json` に従う
 - ESモジュールを使用（CommonJS禁止）
