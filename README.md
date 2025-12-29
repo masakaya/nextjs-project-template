@@ -118,9 +118,22 @@ pnpm generate:api
 
 `src/api/generated/` に以下が生成されます：
 
-- **TypeScript型**: OpenAPIスキーマからの型定義
-- **SDKクライアント**: API呼び出し用クライアント
-- **Zodスキーマ**: バリデーション用
+```
+src/api/generated/
+├── index.ts           # エクスポート集約
+├── types.gen.ts       # TypeScript型定義
+├── sdk.gen.ts         # APIクライアント関数
+├── zod.gen.ts         # Zodバリデーションスキーマ
+├── client.gen.ts      # クライアント設定
+├── client/            # HTTPクライアント詳細
+└── core/              # コアユーティリティ
+```
+
+| ファイル | 内容 |
+|---------|------|
+| `types.gen.ts` | OpenAPIスキーマからのTypeScript型定義 |
+| `sdk.gen.ts` | API呼び出し用クライアント関数 |
+| `zod.gen.ts` | Zodバリデーションスキーマ |
 
 ### 設定
 
