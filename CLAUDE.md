@@ -62,6 +62,14 @@ git fetch origin
 git merge origin/main
 ```
 
+Push後も最新を取り込んでから次の作業を行うこと:
+
+```bash
+git pull origin <current-branch>
+git fetch origin
+git merge origin/main
+```
+
 コンフリクトが発生した場合は解消してからコミットする。
 
 ## Important Rules
