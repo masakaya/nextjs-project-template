@@ -46,7 +46,25 @@ http://localhost:3000 でアプリケーションにアクセスできます。
 
 - **フレームワーク**: Next.js 16
 - **UIライブラリ**: React 19
-- **スタイリング**: Tailwind CSS 4
+- **スタイリング**: Tailwind CSS 4 + shadcn/ui
 - **リンター/フォーマッター**: Biome
 - **テスト**: Vitest, Playwright
 - **パッケージマネージャー**: pnpm
+
+## shadcn/ui コンポーネント追加
+
+```bash
+# コンポーネントを追加
+pnpm dlx shadcn@latest add <component-name>
+
+# 例: accordion を追加
+pnpm dlx shadcn@latest add accordion
+
+# 複数追加
+pnpm dlx shadcn@latest add accordion alert checkbox
+
+# 全コンポーネントを追加
+pnpm dlx shadcn@latest add -a
+```
+
+利用可能なコンポーネント一覧: https://ui.shadcn.com/docs/components
